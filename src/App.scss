@@ -1,0 +1,110 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.Appheader {
+  background-color: #282c34;
+  padding: 21px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
+.App-link {
+  color: #09d3ac;
+}
+
+.AppButton {
+  padding: 18px 20px;
+  font-weight: bold;
+  border: none;
+  float: left;
+  color: black;
+  background: white;
+  border-radius: 2px;
+  text-transform: uppercase;
+  position: relative;
+  line-height: 60px;
+  height: 22px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+
+  &:focus, &:active {
+    outline: none;
+  }
+  &:hover {
+    background: #d4d4d4;
+
+  }
+}
+
+.head.col-md-9 {
+  padding: 3px;
+}
+
+.mainBlock {
+  display: flow-root;
+}
+
+.home {
+  margin-bottom: 35px;
+}
+
+.Slider{
+  margin-bottom: 35px;
+}
+
+.row>.col, .row>[class^=col-] {
+  background: #282c34;
+  border: 1px solid black;
+  color: white;
+  padding: 10px;
+}
+
+.zagolovok {
+  margin-top: 20px;
+}
+
+div[class*='align-items-'] {
+  height: 120px;
+  background: gainsboro;
+}
+.row {
+  margin: 0!important;
+}
+.slick-next {
+  right: 47px!important;
+}
+.slick-prev {
+  left: 15px!important;
+}
+.slick-next:before, [dir=rtl] .slick-prev:before {
+  content: ' > '!important;
+}
+.slick-prev:before {
+  content: ' < '!important;
+}
+.slick-next:before, .slick-prev:before {
+  font-size: 18px;
+  line-height: 1;
+  opacity: .75;
+  color: #ffffff;
+  border-radius: 70px;
+  background: gray;
+  width: 40px;
+  padding: 5px 12px 11px 12px;
+}
+
+.aboutUs {
+  padding: 25px;
+  text-align: left;
+}

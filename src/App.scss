@@ -108,3 +108,12 @@ div[class*='align-items-'] {
   padding: 25px;
   text-align: left;
 }
+
+li.AppButton a {
+  color: #000000;
+
+  &:hover {
+    color: #000000;
+    text-decoration: none;
+  }
+}

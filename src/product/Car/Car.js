@@ -1,6 +1,6 @@
 import React from 'react'
 // import Radium from 'radium'
-import classes from './Car.css'
+import './Car.css'
 
 
 class Car extends React.Component {
@@ -26,15 +26,15 @@ class Car extends React.Component {
 
     render() {
         // console.log('Car render');
-        const inputClasses = [classes.input]; // задаем класс input по-умолчанию. (без точки, мы просто указываем название класса)
+        const inputClasses = ['input']; // задаем класс input по-умолчанию. (без точки, мы просто указываем название класса)
 
         if(this.props.name !== '') { // если props.name не равен пустой строке, то:
-            inputClasses.push(classes.green)
+            inputClasses.push('green')
         } else {
-            inputClasses.push(classes.red)
+            inputClasses.push('red')
         }
         if(this.props.name.length > 4) {
-            inputClasses.push(classes.bold)
+            inputClasses.push('bold')
         }
 
         const style = {
@@ -47,7 +47,7 @@ class Car extends React.Component {
         };
 
         return(
-            <li className={classes.Car} style={style}>
+            <li className={'Car'} style={style}>
                 <h2> Car name: {this.props.name}</h2>
                 <h3> Year: {this.props.year}</h3>
                 <input

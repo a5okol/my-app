@@ -9,19 +9,19 @@ class Home extends React.Component {
 
     render() {
 
-        const rug = 10;
-        const style = {
-            border: '',
-            boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.14)',
-            ':hover': {
-                boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.34)',
-
-            }
-        };
+        // const rug = 10;
+        // const style = {
+        //     border: '',
+        //     boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.14)',
+        //     ':hover': {
+        //         boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.34)',
+        //
+        //     }
+        // };
 
         return (
             <div className={'home'}>
-                <h1>React и Bootstrap 4 практика</h1>
+                <h1>React практика</h1>
                 <SimpleSlider/>
 
             </div>

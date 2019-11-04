@@ -31,7 +31,7 @@ class App extends Component {
     state = { // специально свойство, state - это обычный JS объект, которые описывает состояние, в котором сейчас находится данный компонент.
         cars: [
             {name: 'Porsche', year: 2019},
-            {name: 'Lexus', year: 2019},
+            {name: '', year: 2019},
             {name: 'Lamborghini', year: 2019},
             {name: 'Porsche', year: 2019},
             {name: 'Lexus', year: 2019},
@@ -147,6 +147,7 @@ class App extends Component {
                                 <li className={'AppButton'} onClick={this.toggleHomeHandler}>Home</li>
                                 <li className={'AppButton'} onClick={this.toggleCarsHandler}>Products</li>
                                 <li className={'AppButton'} onClick={this.toggleAboutUsHandler}>About us</li>
+                                <li className={'AppButton'}><a href="https://github.com/a5okol/my-app" className={'link'}>GitHub</a></li>
                             </ul>
                         </div>
                     </div>

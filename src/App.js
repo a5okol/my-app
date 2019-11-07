@@ -3,15 +3,13 @@ import Car from './product/Car/Car'
 import './App.scss'
 import Home from "./home/Home";
 import ArticleAboutUs from './Articles/AboutUs'
-
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 // import SimpleSlider from './home/Slider';
 
 
 class App extends Component {
-
     constructor(props) {
-
         super(props);
 
         /*this.state = {
@@ -41,7 +39,8 @@ class App extends Component {
         pageTitle2: 'React components',
         showHome: true,
         showCars: false,
-        showAboutUs: false
+        showAboutUs: false,
+
     };
 
     ChenButt = (newTitle) => {
@@ -111,28 +110,30 @@ class App extends Component {
         let homepage = null;
         let aboutus = null;
 
+
         if (this.state.showCars) {
             homepage = null;
             cars = this.state.cars.map((car, index) => {
                 return (
-                    <Car
-                        key={index}
-                        name={car.name}
-                        year={car.year}
-                        onChangeName={(event) => this.onChangeName(event.target.value, index)}
-                        onChangeTitle={() => this.ChenButt(car.name)}
-                        onDelete={this.deleteHandler.bind(this, index)}
-                    />
-
+                    <ErrorBoundary key={index}>
+                        <Car
+                            name={car.name}
+                            year={car.year}
+                            index={index}
+                            onChangeName={(event) => this.onChangeName(event.target.value, index)}
+                            onChangeTitle={() => this.ChenButt(car.name)}
+                            onDelete={this.deleteHandler.bind(this, index)}
+                        />
+                    </ErrorBoundary>
                 )
             })
         }
 
         if (this.state.showHome) {
-            homepage = <Home />
+            homepage = <Home/>
         }
         if (this.state.showAboutUs) {
-            aboutus = <ArticleAboutUs />
+            aboutus = <ArticleAboutUs/>
         }
 
         return (
@@ -147,14 +148,13 @@ class App extends Component {
                                 <li className={'AppButton'} onClick={this.toggleHomeHandler}>Home</li>
                                 <li className={'AppButton'} onClick={this.toggleCarsHandler}>Products</li>
                                 <li className={'AppButton'} onClick={this.toggleAboutUsHandler}>About us</li>
-                                <li className={'AppButton'}><a href="https://github.com/a5okol/my-app" className={'link'}>GitHub</a></li>
+                                <li className={'AppButton'}><a href="https://github.com/a5okol/my-app"
+                                                               className={'link'}>GitHub</a></li>
                             </ul>
                         </div>
                     </div>
                 </header>
                 <div className={'mainBlock'}>
-
-
                     <ul>
                         {
                             cars
@@ -179,7 +179,6 @@ class App extends Component {
                     {homepage}
                     {aboutus}
                 </div>
-
             </div>
         );
     }

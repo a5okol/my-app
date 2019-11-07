@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Slider from "react-slick";
 
-
 class SimpleSlider extends Component {
     render() {
         const settings = {
@@ -27,12 +26,13 @@ class SimpleSlider extends Component {
                         <div><img src="https://okko.tv/static/aa4d/2673/58e8/4ba7/8c50/635e941b905d/output_1138x640.jpg"
                                   alt="Тайна Коко" width={'450px'}/>
                         </div>
-                        <div><img src="https://okko.tv/static/fa7d/7e3a/e113/43ba/bf12/92a13d45e313/output_1138x640.jpg"
-                                  alt="Марсианин" width={'450px'}/>
-                        </div>
                         <div><img src="https://okko.tv/static/e1c6/5657/124d/408d/b134/da840b28ee0a/output_1138x640.jpg"
                                   alt="Марсианин" width={'450px'}/>
                         </div>
+                        <div><img src="https://okko.tv/static/fa7d/7e3a/e113/43ba/bf12/92a13d45e313/output_1138x640.jpg"
+                                  alt="Марсианин" width={'450px'}/>
+                        </div>
+
                     </Slider>
                 </div>
 

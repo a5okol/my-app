@@ -1,39 +1,67 @@
 import React from 'react'
 // import Radium from 'radium'
+import PropTypes from 'prop-types'
 import './Car.css'
 
 
 class Car extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.inputRef = React.createRef()
+    }
+
+    componentDidMount() {
+        if (this.props.index === 1) {
+            this.inputRef.focus()
+        }
+    }
 
     // componentWillReceiveProps(nextProps) {
-    //     // console.log('Car componentWillReceiveProps', nextProps);
-    //
-    // }
-    //
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     // console.log('Car shouldComponentUpdate', nextProps, nextState);
-    //     //return nextProps.name.trim() !== this.props.name.trim() // отменяем повторный рендеринг страницы в случае, если к строке добавлен просто пробел
-    // }
-    //
+    //     console.log('Car componentWillReceiveProps', nextProps);
+    // } // данный метод необходим для того, чтобы оаколизировать некоторый локальный state (если он есть) с локальными свойствами. (метод редко используется)
+
+    shouldComponentUpdate(nextProps, nextState) {
+
+        return nextProps.name.trim() !== this.props.name.trim() // отменяем повторный рендеринг страницы в случае, если к строке добавлен просто пробел
+    } // это единственный метод, который должен что-то вернуть (true или false)
+
     // componentWillUpdate(nextProps, nextState) {
-    //     // console.log('Car componentWillUpdate', nextProps, nextState);
+    //     console.log('Car componentWillUpdate', nextProps, nextState);
     // }
+
+    // static getDerivedStateFromProps(nextProps, prevState) {
     //
-    // componentDidUpdate(){
-    //     // console.log('Car componentDidUpdate');
-    // }
+    //     return prevState // (тут мы сожем вернуть различные данные) // return необходим для преобразования и синхронизации со свойством, нам необходимо просто вкрнуть новый объект. Return по сути является результирующим стейтом для нашего компонента.
+    //
+    // } // данный жизненный цикл создан для того для замены метода componentWillUpdate, применяется для того, чтобы обезопасить работу с react. Метод применяется для того, чтобы запретить работу с преобразавание state на прямую и позволяет делоть это немного по другому.
+
+    componentDidUpdate() {
+    }
+
+    getSnapshotBeforeUpdate() {
+    } // данный метод позволяет получить еще не измененные Dom-дерево до обновления.
+
+    // componentWillUnmount(){
+    //     console.log('Car componentWillUnmount');
+    // } // данный метод вызывается тогда, когда идет разрешение нашего компонента и он удаляется у нас из DOM дерева. Тут мы можем очищать различные таймеры, подписки и другие вещи, что позволяет очистить данные при удалении компонента.
 
     render() {
-        // console.log('Car render');
+        console.log('Car render');
+
+        if (Math.random() < 0.1) {
+            throw new Error('Car random failed (тестируем componentDidCatch)')
+        }
+
         const inputClasses = ['input']; // задаем класс input по-умолчанию. (без точки, мы просто указываем название класса)
 
-        if(this.props.name !== '') { // если props.name не равен пустой строке, то:
+        if (this.props.name !== '') { // если props.name не равен пустой строке, то:
             inputClasses.push('green')
         } else {
             inputClasses.push('red')
         }
-        if(this.props.name.length > 4) {
+        if (this.props.name.length > 4) {
             inputClasses.push('bold')
         }
 
@@ -46,11 +74,12 @@ class Car extends React.Component {
             }
         };
 
-        return(
+        return (
             <li className={'Car'} style={style}>
                 <h2> Car name: {this.props.name}</h2>
                 <h3> Year: {this.props.year}</h3>
                 <input
+                    ref={(inputRef) => this.inputRef = inputRef}
                     type="text"
                     onChange={this.props.onChangeName}
                     value={this.props.name}
@@ -62,6 +91,14 @@ class Car extends React.Component {
         );
     }
 }
+
+Car.propTypes = {
+    name: PropTypes.string.isRequired,
+    year: PropTypes.number,
+    index: PropTypes.number,
+    onChangeName: PropTypes.func,
+    onDelete: PropTypes.func
+};
 
 // export default Radium(Car)
 export default Car

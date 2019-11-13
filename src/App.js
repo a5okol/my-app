@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Car from './product/Car/Car'
 import './App.scss'
+import {Route, NavLink} from 'react-router-dom'
 import Home from "./home/Home";
 import ArticleAboutUs from './Articles/AboutUs'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
@@ -116,25 +117,25 @@ class App extends Component {
             cars = this.state.cars.map((car, index) => {
                 return (
                     <ErrorBoundary key={index}>
-                        <Car
+                        <Route path="/products" exact render={() => <Car
                             name={car.name}
                             year={car.year}
                             index={index}
                             onChangeName={(event) => this.onChangeName(event.target.value, index)}
                             onChangeTitle={() => this.ChenButt(car.name)}
                             onDelete={this.deleteHandler.bind(this, index)}
-                        />
+                        />}/>
                     </ErrorBoundary>
                 )
             })
         }
 
-        if (this.state.showHome) {
-            homepage = <Home/>
-        }
-        if (this.state.showAboutUs) {
-            aboutus = <ArticleAboutUs/>
-        }
+        // if (this.state.showHome) {
+        //     homepage = <Route path="/" exact render={() => <Home/>}/>
+        // }
+        // if (this.state.showAboutUs) {
+        //     aboutus = <Route path="/aboutus" component={ArticleAboutUs} />
+        // }
 
         return (
             <div className={'App'} style={divStyle}>
@@ -145,9 +146,9 @@ class App extends Component {
                         </div>
                         <div className="head col-md-9">
                             <ul>
-                                <li className={'AppButton'} onClick={this.toggleHomeHandler}>Home</li>
-                                <li className={'AppButton'} onClick={this.toggleCarsHandler}>Products</li>
-                                <li className={'AppButton'} onClick={this.toggleAboutUsHandler}>About us</li>
+                                <li className={'AppButton'} onClick={this.toggleHomeHandler}><NavLink to="/">Home</NavLink></li>
+                                <li className={'AppButton'} onClick={this.toggleCarsHandler}><NavLink to="/products">Products</NavLink></li>
+                                <li className={'AppButton'} onClick={this.toggleAboutUsHandler}><NavLink to="/aboutus">About us</NavLink></li>
                                 <li className={'AppButton'}><a href="https://github.com/a5okol/my-app"
                                                                className={'link'}>GitHub</a></li>
                             </ul>
@@ -178,6 +179,8 @@ class App extends Component {
                     </ul>
                     {homepage}
                     {aboutus}
+                    <Route path="/" exact render={() => <Home/>}/>
+                    <Route path="/aboutus" component={ArticleAboutUs} />
                 </div>
             </div>
         );

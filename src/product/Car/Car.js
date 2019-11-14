@@ -2,6 +2,7 @@ import React from 'react'
 // import Radium from 'radium'
 import PropTypes from 'prop-types'
 import './Car.css'
+import {withRouter} from 'react-router-dom'
 
 
 class Car extends React.Component {
@@ -48,8 +49,6 @@ class Car extends React.Component {
     // } // данный метод вызывается тогда, когда идет разрешение нашего компонента и он удаляется у нас из DOM дерева. Тут мы можем очищать различные таймеры, подписки и другие вещи, что позволяет очистить данные при удалении компонента.
 
     render() {
-        console.log('Car render');
-
         if (Math.random() < 0.03) {
             throw new Error('Car random failed (тестируем componentDidCatch)')
         }
@@ -75,9 +74,14 @@ class Car extends React.Component {
         };
 
         return (
-            <li className={'Car'} style={style}>
+            <li
+                className={'Car'}
+                style={style}
+                onClick={() => this.props.history.push('/products/' + this.props.name.toLowerCase())}
+            >
                 <h2> Car name: {this.props.name}</h2>
                 <h3> Year: {this.props.year}</h3>
+
                 <input
                     ref={(inputRef) => this.inputRef = inputRef}
                     type="text"
@@ -101,4 +105,4 @@ Car.propTypes = {
 };
 
 // export default Radium(Car)
-export default Car
+export default withRouter(Car)

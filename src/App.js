@@ -44,6 +44,12 @@ class App extends Component {
 
     };
 
+    goToHomePage = () => {
+        this.props.history.push({
+            pathname: '/'
+        })
+    };
+
     ChenButt = (newTitle) => {
         this.setState({
             pageTitle: newTitle
@@ -103,6 +109,7 @@ class App extends Component {
 
 
     render() {
+        console.log('this.props:', this.props.history);
         const divStyle = {
             borderTop: '1px solid'
         };
@@ -117,14 +124,15 @@ class App extends Component {
             cars = this.state.cars.map((car, index) => {
                 return (
                     <ErrorBoundary key={index}>
-                        <Route path="/products" exact render={() => <Car
+                        <Car
                             name={car.name}
                             year={car.year}
                             index={index}
                             onChangeName={(event) => this.onChangeName(event.target.value, index)}
                             onChangeTitle={() => this.ChenButt(car.name)}
                             onDelete={this.deleteHandler.bind(this, index)}
-                        />}/>
+
+                        />
                     </ErrorBoundary>
                 )
             })
@@ -186,9 +194,13 @@ class App extends Component {
                 </header>
                 <div className={'mainBlock'}>
                     <ul>
-                        {
-                            cars
-
+                        <Route path="/products" exact render={() =>
+                            <div style={{
+                                margin: 20,
+                            }}>
+                                <button onClick={this.goToHomePage}>Go to home page</button>
+                            </div>}/>
+                        {cars
                             // второй вариант:
                             /*{this.state.showCars
                             ? this.state.cars.map((car, index) => {
@@ -206,8 +218,8 @@ class App extends Component {
                             // Если true, то выдавай нам списки, если false, то нет.}*/
                         }
                     </ul>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/aboutus" exact component={ArticleAboutUs} />
+                    <Route path="/" exact component={Home}/>
+                    <Route path="/aboutus" exact component={ArticleAboutUs}/>
                 </div>
             </div>
         );

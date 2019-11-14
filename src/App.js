@@ -146,11 +146,40 @@ class App extends Component {
                         </div>
                         <div className="head col-md-9">
                             <ul>
-                                <li className={'AppButton'} onClick={this.toggleHomeHandler}><NavLink to="/">Home</NavLink></li>
-                                <li className={'AppButton'} onClick={this.toggleCarsHandler}><NavLink to="/products">Products</NavLink></li>
-                                <li className={'AppButton'} onClick={this.toggleAboutUsHandler}><NavLink to="/aboutus">About us</NavLink></li>
-                                <li className={'AppButton'}><a href="https://github.com/a5okol/my-app"
-                                                               className={'link'}>GitHub</a></li>
+                                <li
+                                    className={'AppButton'}
+                                    onClick={this.toggleHomeHandler}>
+                                    <NavLink
+                                        to="/"
+                                        exact
+                                        activeClassName={'AppButtonActive'}
+                                    >Home</NavLink></li>
+                                <li
+                                    className={'AppButton'}
+                                    onClick={this.toggleCarsHandler}><NavLink
+                                    to="/products"
+                                    activeClassName={'AppButtonActive'}
+                                >Products</NavLink>
+                                </li>
+                                <li
+                                    className={'AppButton'}
+                                    onClick={this.toggleAboutUsHandler}>
+                                    <NavLink
+                                        to={{
+                                            pathname: '/aboutus',
+                                            search: '?a=1',
+                                            hash: 'hash-test'
+                                        }}
+                                        activeClassName={'AppButtonActive'}
+                                        activeStyle={{background: 'yellow'}}
+                                    >About us
+                                    </NavLink>
+                                </li>
+                                <li
+                                    className={'AppButton'}>
+                                    <a href="https://github.com/a5okol/my-app"
+                                       className={'link'}>GitHub</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -177,10 +206,8 @@ class App extends Component {
                             // Если true, то выдавай нам списки, если false, то нет.}*/
                         }
                     </ul>
-                    {homepage}
-                    {aboutus}
-                    <Route path="/" exact render={() => <Home/>}/>
-                    <Route path="/aboutus" component={ArticleAboutUs} />
+                    <Route path="/" exact component={Home} />
+                    <Route path="/aboutus" exact component={ArticleAboutUs} />
                 </div>
             </div>
         );

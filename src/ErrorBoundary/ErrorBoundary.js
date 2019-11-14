@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component {
                 return (
                 <li className={'Car'}  style={style}>
                     <h3 style={{color: 'red'}}>Random failed (тестируем componentDidCatch)</h3>
-                    <h5>Вероятность ошибки 10%</h5>
+                    <h5>Вероятность ошибки 3%</h5>
                 </li>
                 )
             }

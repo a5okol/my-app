@@ -22,6 +22,19 @@
 }
 
 .AppButton {
+  float: left;
+  text-transform: uppercase;
+  display: flex;
+
+
+  &:focus, &:active {
+    outline: none;
+  }
+}
+
+
+
+.AppButton a {
   padding: 18px 20px;
   font-weight: bold;
   border: none;
@@ -42,9 +55,12 @@
     outline: none;
   }
   &:hover {
-    background: #d4d4d4;
-
+    background: #afafaf;
   }
+}
+
+a.AppButtonActive {
+  background: #afafaf;
 }
 
 .head.col-md-9 {

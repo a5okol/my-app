@@ -42,7 +42,7 @@ class App extends Component {
         showHome: true,
         showCars: false,
         showAboutUs: false,
-
+        isLoggedIn: false
     };
 
     goToHomePage = () => {
@@ -155,7 +155,7 @@ class App extends Component {
                         <div className="head col-md-3">
                             <h2 className="titleTop">{this.state.pageTitle}</h2>
                         </div>
-                        <div className="head col-md-9">
+                        <div className="head col-md-7">
                             <ul>
                                 <li
                                     className={'AppButton'}
@@ -193,6 +193,17 @@ class App extends Component {
                                 </li>
                             </ul>
                         </div>
+                        <div className="head col-md-2">
+                            <button onClick={() => this.setState({isLoggedIn: true})} className={'login'}>Login</button>
+
+                            {this.state.isLoggedIn
+                                ? <Route render={() =>
+                                    <button onClick={() => this.setState({isLoggedIn: false})} className={'login'}>Log
+                                        out</button>
+                                }/>
+                                : null
+                            }
+                        </div>
                     </div>
                 </header>
                 <div className={'mainBlock'}>
@@ -220,20 +231,20 @@ class App extends Component {
                     <Switch>
                         <Route path="/products" exact render={() =>
                             cars = this.state.cars.map((car, index) => {
-                            return (
-                                <ErrorBoundary key={index}>
-                                    <Car
-                                        name={car.name}
-                                        year={car.year}
-                                        index={index}
-                                        onChangeName={(event) => this.onChangeName(event.target.value, index)}
-                                        onChangeTitle={() => this.ChenButt(car.name)}
-                                        onDelete={this.deleteHandler.bind(this, index)}
+                                return (
+                                    <ErrorBoundary key={index}>
+                                        <Car
+                                            name={car.name}
+                                            year={car.year}
+                                            index={index}
+                                            onChangeName={(event) => this.onChangeName(event.target.value, index)}
+                                            onChangeTitle={() => this.ChenButt(car.name)}
+                                            onDelete={this.deleteHandler.bind(this, index)}
 
-                                    />
-                                </ErrorBoundary>
-                            )
-                        })
+                                        />
+                                    </ErrorBoundary>
+                                )
+                            })
                         }/>
 
                         <Route path="/" exact component={Home}/>
@@ -243,7 +254,8 @@ class App extends Component {
                         {/*Вариант 1:
                         <Route render={() => <h1 style={{color: 'red', textAlign: 'center'}}>404 not found</h1>} />*/}
                         {/*Вариант 2:*/}
-                        <Route path="/404" exact render={() => <h1 style={{color: 'red', textAlign: 'center'}}>404 not found</h1>} />
+                        <Route path="/404" exact
+                               render={() => <h1 style={{color: 'red', textAlign: 'center'}}>404 not found</h1>}/>
                         {/*Редирекст со страницы на страницу (работает только при загрузке страницы):*/}
                         {/*<Redirect from ={'/cars'} to={'/aboutus'}/>*/}
                         {/*<Redirect from ={'/cars'} to={'/aboutus'}/>*/}
@@ -255,13 +267,17 @@ class App extends Component {
                             margin: 20,
                         }}>
                             <button onClick={this.goToHomePage} style={{
-                                marginTop: 20}}>Go to home page</button>
+                                marginTop: 20
+                            }}>Go to home page
+                            </button>
                             <br/>
                             <br/>
                             <NavLink
                                 to="/cars"
                                 activeClassName={''}
-                            ><button>Ссылка на /cars с редиректом на aboutus</button></NavLink>
+                            >
+                                <button>Ссылка на /cars с редиректом на aboutus</button>
+                            </NavLink>
 
                         </div>}/>
                 </div>

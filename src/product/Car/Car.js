@@ -77,9 +77,10 @@ class Car extends React.Component {
             <li
                 className={'Car'}
                 style={style}
-                onClick={() => this.props.history.push('/products/' + this.props.name.toLowerCase())}
             >
-                <h2> Car name: {this.props.name}</h2>
+                <h2
+                    onClick={() => this.props.history.push('/products/' + this.props.name.toLowerCase())}
+                > Click: {this.props.name}</h2>
                 <h3> Year: {this.props.year}</h3>
 
                 <input

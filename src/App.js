@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import Car from './product/Car/Car'
 import './App.scss'
-import {Route, NavLink} from 'react-router-dom'
+import {Route, NavLink, Switch} from 'react-router-dom'
 import Home from "./home/Home";
 import ArticleAboutUs from './Articles/AboutUs'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
+import CarDetail from './product/Car/CarDetail/CarDetail'
 
 // import SimpleSlider from './home/Slider';
 
@@ -123,17 +124,19 @@ class App extends Component {
             homepage = null;
             cars = this.state.cars.map((car, index) => {
                 return (
-                    <ErrorBoundary key={index}>
-                        <Car
-                            name={car.name}
-                            year={car.year}
-                            index={index}
-                            onChangeName={(event) => this.onChangeName(event.target.value, index)}
-                            onChangeTitle={() => this.ChenButt(car.name)}
-                            onDelete={this.deleteHandler.bind(this, index)}
+                    <Route path="/products" exact render={() =>
+                        <ErrorBoundary key={index}>
+                            <Car
+                                name={car.name}
+                                year={car.year}
+                                index={index}
+                                onChangeName={(event) => this.onChangeName(event.target.value, index)}
+                                onChangeTitle={() => this.ChenButt(car.name)}
+                                onDelete={this.deleteHandler.bind(this, index)}
 
-                        />
-                    </ErrorBoundary>
+                            />
+                        </ErrorBoundary>
+                    }/>
                 )
             })
         }
@@ -218,8 +221,13 @@ class App extends Component {
                             // Если true, то выдавай нам списки, если false, то нет.}*/
                         }
                     </ul>
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/aboutus" exact component={ArticleAboutUs}/>
+
+                    {/* Компонет Switch выдает нам первый попавшийся url, который полностью совподает с url адресом в браузере. То есть, по сути это аналог команды  "exact" */}
+                    <Switch>
+                        <Route path="/" exact component={Home}/>
+                        <Route path="/aboutus" exact component={ArticleAboutUs}/>
+                        <Route path="/products/:name" exact component={CarDetail}/>
+                    </Switch>
                 </div>
             </div>
         );

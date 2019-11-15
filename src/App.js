@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Car from './product/Car/Car'
 import './App.scss'
-import {Route, NavLink, Switch} from 'react-router-dom'
+import {Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import Home from "./home/Home";
 import ArticleAboutUs from './Articles/AboutUs'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
@@ -120,26 +120,26 @@ class App extends Component {
         let aboutus = null;
 
 
-        if (this.state.showCars) {
-            homepage = null;
-            cars = this.state.cars.map((car, index) => {
-                return (
-                    <Route path="/products" exact render={() =>
-                        <ErrorBoundary key={index}>
-                            <Car
-                                name={car.name}
-                                year={car.year}
-                                index={index}
-                                onChangeName={(event) => this.onChangeName(event.target.value, index)}
-                                onChangeTitle={() => this.ChenButt(car.name)}
-                                onDelete={this.deleteHandler.bind(this, index)}
-
-                            />
-                        </ErrorBoundary>
-                    }/>
-                )
-            })
-        }
+        // if (this.state.showCars) {
+        //     homepage = null;
+        //     cars = this.state.cars.map((car, index) => {
+        //         return (
+        //             <Route path="/products" exact render={() =>
+        //                 <ErrorBoundary key={index}>
+        //                     <Car
+        //                         name={car.name}
+        //                         year={car.year}
+        //                         index={index}
+        //                         onChangeName={(event) => this.onChangeName(event.target.value, index)}
+        //                         onChangeTitle={() => this.ChenButt(car.name)}
+        //                         onDelete={this.deleteHandler.bind(this, index)}
+        //
+        //                     />
+        //                 </ErrorBoundary>
+        //             }/>
+        //         )
+        //     })
+        // }
 
         // if (this.state.showHome) {
         //     homepage = <Route path="/" exact render={() => <Home/>}/>
@@ -197,12 +197,6 @@ class App extends Component {
                 </header>
                 <div className={'mainBlock'}>
                     <ul>
-                        <Route path="/products" exact render={() =>
-                            <div style={{
-                                margin: 20,
-                            }}>
-                                <button onClick={this.goToHomePage}>Go to home page</button>
-                            </div>}/>
                         {cars
                             // второй вариант:
                             /*{this.state.showCars
@@ -224,10 +218,52 @@ class App extends Component {
 
                     {/* Компонет Switch выдает нам первый попавшийся url, который полностью совподает с url адресом в браузере. То есть, по сути это аналог команды  "exact" */}
                     <Switch>
+                        <Route path="/products" exact render={() =>
+                            cars = this.state.cars.map((car, index) => {
+                            return (
+                                <ErrorBoundary key={index}>
+                                    <Car
+                                        name={car.name}
+                                        year={car.year}
+                                        index={index}
+                                        onChangeName={(event) => this.onChangeName(event.target.value, index)}
+                                        onChangeTitle={() => this.ChenButt(car.name)}
+                                        onDelete={this.deleteHandler.bind(this, index)}
+
+                                    />
+                                </ErrorBoundary>
+                            )
+                        })
+                        }/>
+
                         <Route path="/" exact component={Home}/>
                         <Route path="/aboutus" exact component={ArticleAboutUs}/>
                         <Route path="/products/:name" exact component={CarDetail}/>
+                        {/*Роут для 404 ошибки должен всегда идти последним*/}
+                        {/*Вариант 1:
+                        <Route render={() => <h1 style={{color: 'red', textAlign: 'center'}}>404 not found</h1>} />*/}
+                        {/*Вариант 2:*/}
+                        <Route path="/404" exact render={() => <h1 style={{color: 'red', textAlign: 'center'}}>404 not found</h1>} />
+                        {/*Редирекст со страницы на страницу (работает только при загрузке страницы):*/}
+                        {/*<Redirect from ={'/cars'} to={'/aboutus'}/>*/}
+                        {/*<Redirect from ={'/cars'} to={'/aboutus'}/>*/}
+                        <Redirect to={'/404'}/>
                     </Switch>
+
+                    <Route path="/products" exact render={() =>
+                        <div style={{
+                            margin: 20,
+                        }}>
+                            <button onClick={this.goToHomePage} style={{
+                                marginTop: 20}}>Go to home page</button>
+                            <br/>
+                            <br/>
+                            <NavLink
+                                to="/cars"
+                                activeClassName={''}
+                            ><button>Ссылка на /cars с редиректом на aboutus</button></NavLink>
+
+                        </div>}/>
                 </div>
             </div>
         );

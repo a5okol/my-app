@@ -6,6 +6,7 @@ import Home from "./home/Home";
 import ArticleAboutUs from './Articles/AboutUs'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import CarDetail from './product/Car/CarDetail/CarDetail'
+import {connect} from 'react-redux' // подключаем функцию connect, которая работает примерно как hoc
 
 // import SimpleSlider from './home/Slider';
 
@@ -110,6 +111,7 @@ class App extends Component {
 
 
     render() {
+        console.log('APP', this.props);
         console.log('this.props:', this.props.history);
         const divStyle = {
             borderTop: '1px solid'
@@ -278,12 +280,22 @@ class App extends Component {
                             >
                                 <button>Ссылка на /cars с редиректом на aboutus</button>
                             </NavLink>
+                            <h3 style={{margin: 20}}>Счетчик Redux <strong>{this.props.counter}</strong></h3>
+                        </div>
 
-                        </div>}/>
+                    }/>
                 </div>
             </div>
         );
     }
 }
 
-export default App;
+function mapStateToProps(state) { // функция принимает в себя общий state, который характерен для всего нашего приложения (в нашем случае это объект initialState (из rootReducer.js))
+
+    return {
+        counter: state.counter // тут мы говорим, что поле state.counter будет равнятся названию counter, И ТЕПЕР, counter мы можем исползоват в данном компоненте не как state, а как props.
+
+    } // эту функцию мы определяем для того, чтобы мы могли вернут новый js объект, где мы изменим и трансформируем какие-то данные из state, для того, чтобы они стали обычными параметрами для компонента, который мы соединяем.
+}
+
+export default connect(mapStateToProps)(App); // вызываем функцию connect и после того, как она будет вызвана, она нам вернет новую функцию, в которую мы уже должны положит тот компонент, с которым мы уже хотим работат. То ест мы вызываем функцию и после этого она нам что-то вернет и эту функцию мы уже вызовим с нашим компонентом.

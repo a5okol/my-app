@@ -111,8 +111,6 @@ class App extends Component {
 
 
     render() {
-        console.log('APP', this.props);
-        console.log('this.props:', this.props.history);
         const divStyle = {
             borderTop: '1px solid'
         };
@@ -281,6 +279,10 @@ class App extends Component {
                                 <button>Ссылка на /cars с редиректом на aboutus</button>
                             </NavLink>
                             <h3 style={{margin: 20}}>Счетчик Redux <strong>{this.props.counter}</strong></h3>
+                            <div className={'Actions'}>
+                                <button onClick={this.props.onAdd}>Добавит 1</button>
+                                <button onClick={this.props.onSub}>Вычесть 1</button>
+                            </div>
                         </div>
 
                     }/>
@@ -298,4 +300,12 @@ function mapStateToProps(state) { // функция принимает в себ
     } // эту функцию мы определяем для того, чтобы мы могли вернут новый js объект, где мы изменим и трансформируем какие-то данные из state, для того, чтобы они стали обычными параметрами для компонента, который мы соединяем.
 }
 
-export default connect(mapStateToProps)(App); // вызываем функцию connect и после того, как она будет вызвана, она нам вернет новую функцию, в которую мы уже должны положит тот компонент, с которым мы уже хотим работат. То ест мы вызываем функцию и после этого она нам что-то вернет и эту функцию мы уже вызовим с нашим компонентом.
+function mapDispatchToProps(dispatch) { // эта функция необходима для того, чтобы вернут некоторый объект
+    return {
+        onAdd: () => dispatch({type: 'ADD'}),
+        onSub: () => dispatch({type: 'SUB'})
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App); // вызываем функцию connect и после того, как она будет вызвана, она нам вернет новую функцию, в которую мы уже должны положит тот компонент, с которым мы уже хотим работат. То ест мы вызываем функцию и после этого она нам что-то вернет и эту функцию мы уже вызовим с нашим компонентом.

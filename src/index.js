@@ -5,12 +5,21 @@ import App from './App';
 import Footer from "./Footer";
 import {BrowserRouter} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import rootReducer from './redux/rootReducer'
+
+
+const store = createStore(rootReducer);
 
 const application = (
-    <BrowserRouter>
-        <App />
-        <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <App/>
+            <Footer/>
+        </BrowserRouter>
+    </Provider>
+
 );
 
 ReactDOM.render(application, document.getElementById('root'));

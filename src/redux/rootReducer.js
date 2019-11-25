@@ -1,26 +1,8 @@
-const initialState = {
-    counter: 110
-};
+import {combineReducers} from 'redux' // данная функция вернет нам один новый Reducer, который будет включат в себя все редюсы, которые мы тут перечислим.
 
-export default function rootReducer(state = initialState, action) {
+import Counter1 from './reducers/Counter1'
+import Counter2 from './reducers/Counter2'
 
-    switch (action.type) {
-        case 'ADD':
-            return {
-                counter: state.counter + 1
-            };
-        case 'SUB':
-            return {
-                counter: state.counter - 1
-            };
-        case 'ADD_NUMBER':
-            return {
-                counter: state.counter + action.payload
-            };
-        default:
-            return state
-
-    }
-
-    // return state
-}
+export default combineReducers({
+    Counter1, Counter2
+})

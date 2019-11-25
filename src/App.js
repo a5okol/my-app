@@ -7,6 +7,7 @@ import ArticleAboutUs from './Articles/AboutUs'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import CarDetail from './product/Car/CarDetail/CarDetail'
 import {connect} from 'react-redux' // подключаем функцию connect, которая работает примерно как hoc
+import Counter from './redux/Counter'
 
 // import SimpleSlider from './home/Slider';
 
@@ -286,6 +287,8 @@ class App extends Component {
                             <div className={'Actions'}>
                                 <button onClick={() => this.props.onAddNumber(15)}>Добавит 15</button>
                                 <button onClick={() => this.props.onAddNumber(-25)}>Вычесть 25</button>
+                                {/*Второй способ передачи данных: можно просто забайндить и передать число*/}
+                                <Counter/>
                             </div>
                         </div>
 
@@ -299,7 +302,7 @@ class App extends Component {
 function mapStateToProps(state) { // функция принимает в себя общий state, который характерен для всего нашего приложения (в нашем случае это объект initialState (из rootReducer.js))
 
     return {
-        counter: state.counter // тут мы говорим, что поле state.counter будет равнятся названию counter, И ТЕПЕР, counter мы можем исползоват в данном компоненте не как state, а как props.
+        counter: state.Counter1.counter // тут мы говорим, что поле state.counter будет равнятся названию counter, И ТЕПЕР, counter мы можем исползоват в данном компоненте не как state, а как props.
 
     } // эту функцию мы определяем для того, чтобы мы могли вернут новый js объект, где мы изменим и трансформируем какие-то данные из state, для того, чтобы они стали обычными параметрами для компонента, который мы соединяем.
 }

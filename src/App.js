@@ -283,6 +283,10 @@ class App extends Component {
                                 <button onClick={this.props.onAdd}>Добавит 1</button>
                                 <button onClick={this.props.onSub}>Вычесть 1</button>
                             </div>
+                            <div className={'Actions'}>
+                                <button onClick={() => this.props.onAddNumber(15)}>Добавит 15</button>
+                                <button onClick={() => this.props.onAddNumber(-25)}>Вычесть 25</button>
+                            </div>
                         </div>
 
                     }/>
@@ -303,7 +307,8 @@ function mapStateToProps(state) { // функция принимает в себ
 function mapDispatchToProps(dispatch) { // эта функция необходима для того, чтобы вернут некоторый объект
     return {
         onAdd: () => dispatch({type: 'ADD'}),
-        onSub: () => dispatch({type: 'SUB'})
+        onSub: () => dispatch({type: 'SUB'}),
+        onAddNumber: number => dispatch({type: 'ADD_NUMBER', payload: number})
     }
 
 }

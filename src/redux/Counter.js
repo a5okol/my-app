@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 
 class Counter extends React.Component {
     render() {
-        console.log (this.props);
-
         return (
             <div style={{padding: 20, border: '1px solid #ccc', margin: 20}}>
                 <h1>Counter {this.props.counter}</h1>

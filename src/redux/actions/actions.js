@@ -23,3 +23,11 @@ export function add2(number) {
         payload: number
     }
 }
+
+export function onasync(number) {
+    return (dispatch) => {
+        setTimeout(() => {
+            dispatch(addNumber(number))
+        }, 3000)
+    }
+}

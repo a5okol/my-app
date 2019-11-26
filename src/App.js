@@ -8,7 +8,7 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import CarDetail from './product/Car/CarDetail/CarDetail'
 import {connect} from 'react-redux' // подключаем функцию connect, которая работает примерно как hoc
 import Counter from './redux/Counter'
-import {add, addNumber, sub} from "./redux/actions/actions";
+import {add, addNumber, onasync, sub} from "./redux/actions/actions";
 
 // import SimpleSlider from './home/Slider';
 
@@ -291,6 +291,10 @@ class App extends Component {
                                 {/*Второй способ передачи данных: можно просто забайндить и передать число*/}
                                 <Counter/>
                             </div>
+                            <div className={'Actions'}>
+                                <button onClick={() => this.props.onAsyncAdd(220)}>Асинхронно добавить 220 (через 3 сек.)</button>
+                                {/*Второй способ передачи данных: можно просто забайндить и передать число*/}
+                            </div>
                         </div>
 
                     }/>
@@ -312,7 +316,8 @@ function mapDispatchToProps(dispatch) { // эта функция необход�
     return {
         onAdd: () => dispatch(add()),
         onSub: () => dispatch(sub()),
-        onAddNumber: number => dispatch(addNumber(number))
+        onAddNumber: number => dispatch(addNumber(number)),
+        onAsyncAdd: number => dispatch(onasync(number))
     }
 
 }

@@ -1,3 +1,5 @@
+import {ADD2} from "../actions/actionsTypes";
+
 const initialState = {
     counter2: 2000
 };
@@ -5,7 +7,7 @@ const initialState = {
 export default function Counter2(state = initialState, action) {
 
     switch (action.type) {
-        case 'ADD2':
+        case ADD2:
             return {
                 counter2: state.counter2 + action.payload
             };

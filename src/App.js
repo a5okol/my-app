@@ -8,6 +8,7 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import CarDetail from './product/Car/CarDetail/CarDetail'
 import {connect} from 'react-redux' // подключаем функцию connect, которая работает примерно как hoc
 import Counter from './redux/Counter'
+import {add, addNumber, sub} from "./redux/actions/actions";
 
 // import SimpleSlider from './home/Slider';
 
@@ -309,9 +310,9 @@ function mapStateToProps(state) { // функция принимает в себ
 
 function mapDispatchToProps(dispatch) { // эта функция необходима для того, чтобы вернут некоторый объект
     return {
-        onAdd: () => dispatch({type: 'ADD'}),
-        onSub: () => dispatch({type: 'SUB'}),
-        onAddNumber: number => dispatch({type: 'ADD_NUMBER', payload: number})
+        onAdd: () => dispatch(add()),
+        onSub: () => dispatch(sub()),
+        onAddNumber: number => dispatch(addNumber(number))
     }
 
 }
